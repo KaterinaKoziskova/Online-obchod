@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="cz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FantasyGear - Košík</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-grey bg-grey" style="background-color: rgba(224, 222, 222, 0.436)">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" style="color:rgb(0, 0, 0)" href="ukol.html"><strong>Produkty</strong></a>
+                    <span id="cart-counter" class="badge badge-danger position-absolute" style="top: 5px; right: 10px; display: none;">0</span>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link position-relative" href="kosik.html" style="color: black;">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-counter" class="badge badge-danger position-absolute" style="top: 5px; right: 10px; display: none;">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Váš košík</h1>
+        <br>
+        <ul id="cart-list" class="list-group mb-3">
+        </ul>
+        <hr>
+        <h6 id="total-price">Cena: </h6>
+        <br>
+        <a href="#" class="btn btn-primary">Zaplatit vše</a>
+        <a href="ukol.html" class="btn btn-primary">Zpět na produkty</a>
+        
+    </div>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let products = JSON.parse(localStorage.getItem('selectedProducts')) || [];
+            let cartList = document.getElementById('cart-list');
+            let totalPriceElement = document.getElementById('total-price');
+            let totalPrice = 0;
+
+            products.forEach(function (product) {
+                let listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.textContent = product.name + " - " + product.price + " Kč";
+                cartList.appendChild(listItem);
+                totalPrice += product.price; 
+            });
+
+            totalPriceElement.textContent = "Cena: " + totalPrice + " Kč"; 
+        });
+    </script>
+
+</body>
+
+</html>
